@@ -4,7 +4,6 @@
   "description": "",
   "main": "dist/app.bundle.js",
   "dependencies": {
-    "iconv-lite": "^0.6.3",
     "serialport": "^7.1.5",
     "usb-detection": "^4.13.0"
   },
