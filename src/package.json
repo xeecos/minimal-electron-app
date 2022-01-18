@@ -1,9 +1,8 @@
 {
-    "name": "minimal-electron-app",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "author": "",
-    "license": "MIT"
-  }
-  
+  "name": "minimal-electron-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.bundle.js",
+  "author": "",
+  "license": "MIT"
+}

@@ -10,11 +10,11 @@ AppVerName={#MyAppName}
 
 DefaultDirName={commonappdata}\{#MyAppId}
 DefaultGroupName={#MyAppId}
-OutputDir=.\build
+OutputDir=.\releases
 OutputBaseFilename={#MyAppName}
 SetupIconFile=installer.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
-Compression=lzma
+Compression=lzma/ultra
 SolidCompression=yes
 AppMutex={#MyAppName}
 ; "ArchitecturesAllowed=x64" specifies that Setup cannot run on
