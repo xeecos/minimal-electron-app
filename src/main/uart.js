@@ -45,9 +45,8 @@ class Uart {
             {
                 if(self._uart&&self._uart.isOpen)
                 {
-                    self._uart.write(Buffer.from(msg.data));
+                    self._uart.write(Buffer.from(msg.data.split("\\n").join("\n").split("\\r").join("\r")));
                     self._uart.drain(()=>{
-                        console.log("send:",msg.data.length);
                     });
                 }
             }

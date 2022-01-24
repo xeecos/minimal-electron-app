@@ -10,10 +10,7 @@ export default function Sender(props)
             disabled={!state.connected} 
             style={{width:"calc(100% - 93px)",marginLeft:3}} 
             onPressEnter={(evt)=>{
-                Communication.send({
-                    method:"serial",
-                    action:"send",
-                    data:`${evt.target.value}${state.lineEnd.replace("\\n","\n").replace("\\r","\r")}`})
+                dispatch({type:"messages",action:"send",value:`${evt.target.value}${state.lineEnd}`});
             }} 
             addonBefore="send"
         />

@@ -1,4 +1,4 @@
-
+import Communication from "./comm"
 const reducer = (state, action) => {
     switch(action.type)  {
         case "connected":
@@ -7,9 +7,22 @@ const reducer = (state, action) => {
             connected: action.value
             }
         case "messages":
+            if(action.action=="send")
+            {
+                Communication.send({
+                    method:"serial",
+                    action:"send",
+                    data:action.value})
+            }
+            let messages = state.messages;
+            messages.unshift({time:new Date(),action:action.action,data:action.value});
+            if(messages.length>10)
+            {
+                messages.pop();
+            }
             return  {
               ...state,
-              messages: action.value
+              messages
             }
         case "ports":
             return  {

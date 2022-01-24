@@ -27,10 +27,7 @@ function App()
             dispatch({type:"connected",value:res.connected});
         });
         Communication.on("serial","data",(res)=>{
-            recv.push(`${new Date().toString()} - ${res.data.toString()}`);
-            // setMessages(recv)
-            console.log(recv.length)
-            dispatch({type:"messages",value:recv});
+            dispatch({type:"messages",action:"recv",value:res.data});
         });
         
         Communication.send({method:"serial",action:"list"});
