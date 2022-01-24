@@ -1,6 +1,5 @@
-import React,{useContext,useState} from "react"
+import React from "react"
 import {Input,Select} from "antd"
-import Communication from "./comm"
 const { Option } = Select;
 export default function Sender(props)
 {

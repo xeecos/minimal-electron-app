@@ -10,12 +10,8 @@ import "../style/style.css";
 
 function App()
 {
-    const AppContext = React.createContext({});
-    
     const [state, dispatch] = useReducer(reducer, { connected: false, messages:[], ports:[], port:"", baudRate: 230400, lineEnd:"\\n" });
     useEffect(() => {
-        let recv = [];
-        
         Communication.on("serial","list",(res)=>{
             console.log("list:",res);
             res.data.sort((a, b) => { 
@@ -29,7 +25,6 @@ function App()
         Communication.on("serial","data",(res)=>{
             dispatch({type:"messages",action:"recv",value:res.data});
         });
-        
         Communication.send({method:"serial",action:"list"});
     }, []);
     return  <div className="app">

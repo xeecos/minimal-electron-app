@@ -1,4 +1,5 @@
 import Communication from "./comm"
+const MAX_LINES_LOG = 200;
 const reducer = (state, action) => {
     switch(action.type)  {
         case "connected":
@@ -16,7 +17,7 @@ const reducer = (state, action) => {
             }
             let messages = state.messages;
             messages.unshift({time:new Date(),action:action.action,data:action.value});
-            if(messages.length>10)
+            if(messages.length>MAX_LINES_LOG)
             {
                 messages.pop();
             }

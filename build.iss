@@ -1,4 +1,4 @@
-﻿#define MyAppName "Minimal Electron App"
+﻿#define MyAppName "Serial Monitor"
 #define MyAppVersion "1.0.0"
 #define MyAppExeName "minimal-electron-app.exe"
 #define MyAppId "miniapp"
