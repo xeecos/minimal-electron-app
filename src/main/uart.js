@@ -43,7 +43,13 @@ class Uart {
             break;
             case "send":
             {
-                console.log(msg.data)
+                if(self._uart&&self._uart.isOpen)
+                {
+                    self._uart.write(Buffer.from(msg.data));
+                    self._uart.drain(()=>{
+                        console.log("send:",msg.data.length);
+                    });
+                }
             }
             break;
             case "file":

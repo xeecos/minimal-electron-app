@@ -13,7 +13,7 @@ export default function Sender(props)
                 Communication.send({
                     method:"serial",
                     action:"send",
-                    data:`${evt.target.value}${state.lineEnd}`})
+                    data:`${evt.target.value}${state.lineEnd.replace("\\n","\n").replace("\\r","\r")}`})
             }} 
             addonBefore="send"
         />
