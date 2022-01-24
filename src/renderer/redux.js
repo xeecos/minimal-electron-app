@@ -35,6 +35,11 @@ const reducer = (state, action) => {
                 ...state,
                 port: action.value
             }
+        case "mode":
+            return  {
+                ...state,
+                mode: action.value
+            }
         case "baudRate":
             return  {
                 ...state,

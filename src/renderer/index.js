@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Ports from "./ports"
 import Communication from "./comm"
 import Logs from "./logs"
+import Commands from "./commands"
 import Sender from "./sender"
 import reducer from "./redux"
 import "antd/dist/antd.css";
@@ -10,10 +11,9 @@ import "../style/style.css";
 
 function App()
 {
-    const [state, dispatch] = useReducer(reducer, { connected: false, messages:[], ports:[], port:"", baudRate: 230400, lineEnd:"\\n" });
+    const [state, dispatch] = useReducer(reducer, { mode:"General",connected: false, messages:[], ports:[], port:"", baudRate: 230400, lineEnd:"\\n" });
     useEffect(() => {
         Communication.on("serial","list",(res)=>{
-            console.log("list:",res);
             res.data.sort((a, b) => { 
                 return a.comName.replace("COM", "") - b.comName.replace("COM", "")
             });
@@ -30,6 +30,7 @@ function App()
     return  <div className="app">
                 <Ports state={state} dispatch={dispatch}/>
                 <Logs state={state} dispatch={dispatch}/>
+                <Commands state={state} dispatch={dispatch}/>
                 <Sender state={state} dispatch={dispatch}/>
             </div>
 }
