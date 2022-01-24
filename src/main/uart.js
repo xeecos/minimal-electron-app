@@ -4,6 +4,7 @@ class Uart {
     constructor() {
         const self = this;
         self._list = [];
+        self._window = null;
     }
     ready(window) {
         const self = this;
@@ -16,6 +17,41 @@ class Uart {
         self.getSerialPorts().then(() => {
             window.send("main", { method: "serial", action: "list", data: self._list })
         });
+        window.on("serial",self.onMessage.bind(self));
+        self._window = window;
+    }
+    onMessage(sender,msg)
+    {
+        const self = this;
+        switch(msg.action)
+        {
+            case "connect":
+            {
+                self.connect(msg.port,msg.baudRate).then(()=>{
+                    self._window.send("main",{method:"serial",action:"connect",connected:true})
+                },()=>{
+                    self._window.send("main",{method:"serial",action:"connect",connected:false})
+                });
+            }
+            break;
+            case "disconnect":
+            {
+                self.disconnect().then(()=>{
+                    self._window.send("main",{method:"serial",action:"connect",connected:false})
+                })
+            }
+            break;
+            case "send":
+            {
+                console.log(msg.data)
+            }
+            break;
+            case "file":
+            {
+                
+            }
+            break;
+        }
     }
     findDeviceIndex(devices, name) {
         for (let i = 0; i < devices.length; i++) {
@@ -57,6 +93,45 @@ class Uart {
                 });
                 resolve(list);
             });
+        })
+    }
+    connect(port,baudRate)
+    {
+        const self = this;
+        return new Promise((resolve,reject)=>{
+            self._uart = new serialport(port,{baudRate:Number(baudRate),autoOpen:false},(err,res)=>{
+                
+            });
+            self._uart.open(err=>{
+                if(!err)
+                {
+                    self._uart.on("data",(data)=>{
+                        self._window.send("main",{method:"serial",action:"data",data})
+                    })
+                    resolve();
+                }
+                else
+                {
+                    reject();
+                }
+            });
+        })
+    }
+    disconnect()
+    {
+        const self = this;
+        return new Promise(resolve=>{
+            if(!self._uart)return resolve();
+            try
+            {
+                self._uart.close();
+            }
+            catch(err)
+            {
+
+            }
+            self._uart = null;
+            setTimeout(()=>{resolve();},100);
         })
     }
     destroy() {

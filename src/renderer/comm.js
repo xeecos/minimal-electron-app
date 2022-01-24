@@ -6,7 +6,6 @@ class Communication
         const self = this;
         self._events = [];
         ipcRenderer.on("main",(evt,args)=>{
-            console.log(args)
             if(self.resolve)
             {
                 self.resolve(args);
