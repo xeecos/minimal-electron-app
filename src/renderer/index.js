@@ -1,12 +1,16 @@
 import React,{useReducer,useEffect} from "react";
 import { Tabs } from 'antd';
 import ReactDOM from "react-dom";
+import reducer from "./redux"
 import Ports from "./ports"
 import Communication from "./comm"
 import Logs from "./logs"
 import Commands from "./commands"
+import Conditions from "./conditions"
+import GraphView from "./graph"
+import GraphSetting from "./graph-setting"
 import Sender from "./sender"
-import reducer from "./redux"
+import FileSender from "./file-sender"
 import "antd/dist/antd.css";
 import "../style/style.css";
 
@@ -39,10 +43,14 @@ function App()
                         <Sender state={state} dispatch={dispatch}/>
                     </TabPane>
                     <TabPane tab="Stream" key="2">
-                    
+                        <Logs state={state} dispatch={dispatch}/>
+                        <Conditions state={state} dispatch={dispatch}/>
+                        <FileSender state={state} dispatch={dispatch}/>
                     </TabPane>
                     <TabPane tab="Graphics" key="3">
-                    
+                        <GraphView state={state} dispatch={dispatch}/>
+                        <GraphSetting state={state} dispatch={dispatch}/>
+                        <Sender state={state} dispatch={dispatch}/>
                     </TabPane>
                 </Tabs>
             </div>
