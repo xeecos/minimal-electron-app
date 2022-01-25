@@ -1,4 +1,5 @@
 import React,{useReducer,useEffect} from "react";
+import { Tabs } from 'antd';
 import ReactDOM from "react-dom";
 import Ports from "./ports"
 import Communication from "./comm"
@@ -8,6 +9,8 @@ import Sender from "./sender"
 import reducer from "./redux"
 import "antd/dist/antd.css";
 import "../style/style.css";
+
+const { TabPane } = Tabs;
 
 function App()
 {
@@ -29,9 +32,19 @@ function App()
     }, []);
     return  <div className="app">
                 <Ports state={state} dispatch={dispatch}/>
-                <Logs state={state} dispatch={dispatch}/>
-                <Commands state={state} dispatch={dispatch}/>
-                <Sender state={state} dispatch={dispatch}/>
+                <Tabs style={{marginLeft:4}} defaultActiveKey="1" onChange={()=>{}}>
+                    <TabPane tab="General" key="1">
+                        <Logs state={state} dispatch={dispatch}/>
+                        <Commands state={state} dispatch={dispatch}/>
+                        <Sender state={state} dispatch={dispatch}/>
+                    </TabPane>
+                    <TabPane tab="Stream" key="2">
+                    
+                    </TabPane>
+                    <TabPane tab="Graphics" key="3">
+                    
+                    </TabPane>
+                </Tabs>
             </div>
 }
 ReactDOM.render(
